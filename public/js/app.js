@@ -50155,6 +50155,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -50178,15 +50223,88 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
+      _c("div", { staticClass: "row mt-3" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
+              _c("h3", { staticClass: "card-title" }, [
+                _vm._v("Responsive Hover Table")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-tools" }, [
+                _c("span", [
+                  _c("button", { staticClass: "btn btn-primary btn-outline" }, [
+                    _c("i", { staticClass: "fas fa-plus-circle" }),
+                    _vm._v(" Add New\n              ")
+                  ])
+                ])
+              ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("I'm an Dashboard component.")
+            _c("div", { staticClass: "card-body table-responsive p-0" }, [
+              _c("table", { staticClass: "table table-hover" }, [
+                _c("tbody", [
+                  _c("tr", [
+                    _c("th", [_vm._v("ID")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Name")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Email")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Type")]),
+                    _vm._v(" "),
+                    _c("th"),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Modify")]),
+                    _vm._v(" "),
+                    _c("th")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v("183")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("John Doe")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("11-7-2014")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "tag tag-success" }, [
+                        _vm._v("Approved")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-warning btn-sm btn-block",
+                          attrs: { href: "" }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-pencil-alt" }),
+                          _vm._v(" Edit\n                  ")
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-danger btn-sm btn-block",
+                          attrs: { href: "" }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-trash-alt" }),
+                          _vm._v(" Delete\n                  ")
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
             ])
           ])
         ])
