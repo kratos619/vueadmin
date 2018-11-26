@@ -13905,13 +13905,7 @@ window.Vue = __webpack_require__(37);
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 
-var routes = [{
-    path: '/dashboard',
-    component: __webpack_require__(51)
-}, {
-    path: '/profile',
-    component: __webpack_require__(54)
-}];
+var routes = [{ path: '/dashboard', component: __webpack_require__(51) }, { path: '/profile', component: __webpack_require__(54) }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history',
