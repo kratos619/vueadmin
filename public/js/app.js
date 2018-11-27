@@ -70833,6 +70833,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70850,6 +70854,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    updateUser: function updateUser(user) {
+      this.form.reset();
+      $("#exampleModal").modal("show");
+      this.form.fill(user);
+    },
     deleteUser: function deleteUser(id) {
       var _this = this;
 
@@ -70886,7 +70895,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       this.$Progress.start();
-
       this.form.post("api/user").then(function () {
         Fire.$emit("after_created");
         $("#exampleModal").modal("hide");
@@ -70957,7 +70965,24 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(2, true),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-warning btn-sm btn-block",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                _vm.updateUser(user)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-pencil-alt" }),
+                            _vm._v(" Edit\n                  ")
+                          ]
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("td"),
                       _vm._v(" "),
@@ -71008,7 +71033,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "form",
@@ -71238,7 +71263,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(3)
                 ]
               )
             ])
@@ -71295,24 +71320,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Modify")]),
       _vm._v(" "),
       _c("th")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-warning btn-sm btn-block",
-          attrs: { href: "" }
-        },
-        [
-          _c("i", { staticClass: "fas fa-pencil-alt" }),
-          _vm._v(" Edit\n                  ")
-        ]
-      )
     ])
   },
   function() {

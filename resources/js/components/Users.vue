@@ -41,7 +41,11 @@
                     <span class="tag tag-success">{{user.type}}</span>
                   </td>
                   <td>
-                    <a class="btn btn-warning btn-sm btn-block" href>
+                    <a
+                      class="btn btn-warning btn-sm btn-block"
+                      href="#"
+                      v-on:click="updateUser(user)"
+                    >
                       <i class="fas fa-pencil-alt"></i> Edit
                     </a>
                   </td>
@@ -166,6 +170,11 @@ export default {
     };
   },
   methods: {
+    updateUser(user) {
+      this.form.reset();
+      $("#exampleModal").modal("show");
+      this.form.fill(user);
+    },
     deleteUser(id) {
       swal({
         title: "Are you sure?",
@@ -197,7 +206,6 @@ export default {
     },
     createUser() {
       this.$Progress.start();
-
       this.form
         .post("api/user")
         .then(() => {
