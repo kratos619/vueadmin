@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import moment from 'moment';
+import VueProgressBar from 'vue-progressbar';
 import VueRouter from 'vue-router';
 import { Form, HasError, AlertError } from 'vform';
 import Vue from 'vue';
@@ -27,6 +28,12 @@ const router = new VueRouter({
     mode: 'history',
     routes, // short for `routes: routes`
     linkActiveClass: 'active'
+});
+
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '2px'
 });
 
 Vue.filter('newDate', function(created) {

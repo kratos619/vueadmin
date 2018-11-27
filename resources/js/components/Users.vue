@@ -176,7 +176,9 @@
           }
           },
         created() {
+            this.$Progress.start();
             this.loadUser();
+            this.$Progress.finish()
             //console.log(this.loadUser());
             
         }
