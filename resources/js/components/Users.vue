@@ -31,12 +31,12 @@
                   <th>Modify</th>
                   <th></th>
                 </tr>
-                <tr>
-                  <td>183</td>
-                  <td>John Doe</td>
-                  <td>11-7-2014</td>
+                <tr v-for="user in users" :key="user.id">
+                  <td>{{user.id}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.email}}</td>
                   <td>
-                    <span class="tag tag-success">Approved</span>
+                    <span class="tag tag-success">{{user.type}}</span>
                   </td>
                   <td>
                     <a class="btn btn-warning btn-sm btn-block" href>
@@ -148,6 +148,8 @@
     export default {
         data(){
           return{
+            users: {}
+          ,
           form: new Form({
                 name:'',
                 email:'',
@@ -160,13 +162,21 @@
             
         },
         methods:{
+          loadUser(){
+            axios.get('api/user')
+            .then(({data}) => {
+              this.users = data.data
+            });
+          },
           createUser(){
            this.form.post('api/user')
            .then(({ data }) => { console.log(data) });
           }
           },
-        mounted() {
-            console.log('Component mounted.')
+        created() {
+            this.loadUser();
+            //console.log(this.loadUser());
+            
         }
     }
 </script>
