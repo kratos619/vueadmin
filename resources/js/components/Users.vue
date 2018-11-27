@@ -47,7 +47,11 @@
                   </td>
                   <td></td>
                   <td>
-                    <a class="btn btn-danger btn-sm btn-block" href>
+                    <a
+                      href="#"
+                      class="btn btn-danger btn-sm btn-block"
+                      v-on:click="deleteUser(user.id)"
+                    >
                       <i class="fas fa-trash-alt"></i> Delete
                     </a>
                   </td>
@@ -147,63 +151,82 @@
 </template>
 
 <script>
-    export default {
-        data(){
-          return{
-            users: {}
-          ,
-          form: new Form({
-                name:'',
-                email:'',
-                password:'',
-                about:'',
-                type:'',
-                photo:''
+export default {
+  data() {
+    return {
+      users: {},
+      form: new Form({
+        name: "",
+        email: "",
+        password: "",
+        about: "",
+        type: "",
+        photo: ""
+      })
+    };
+  },
+  methods: {
+    deleteUser(id) {
+      swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          this.form
+            .delete("api/user/" + id)
+            .then(() => {
+              swal("Deleted!", "Your file has been deleted.", "success");
+              // This is relode page after event perform
+              Fire.$emit("after_created");
             })
-          }
-            
-        },
-        methods:{
-          loadUser(){
-            axios.get('api/user')
-            .then(({data}) => {
-              this.users = data.data
+            .catch(e => {
+              swal("Failed!", "Something went Wrong..", "warning");
             });
-          },
-          createUser(){
-            this.$Progress.start();
-          
-          this.form.post('api/user')
-          .then(() => {
-            Fire.$emit('after_created');
-            $('#exampleModal').modal('hide')
-            toast({
-                type: 'success',
-                title: 'User Created successfully'
-              });
-            this.$Progress.finish();
-         
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-           
-          }
-          },
-        created() {
-          this.loadUser();
-          Fire.$on('after_created',() => {
-            this.loadUser();
-          })
-          // Fire.$refs('dom-element' , () => {
-          //   this.loadUser();
-          // })
-          // setInterval(() => {
-          //   this.loadUser()
-          // },2000)
-          
-            //console.log(this.loadUser());
-            
         }
+      });
+    },
+    loadUser() {
+      axios.get("api/user").then(({ data }) => {
+        this.users = data.data;
+      });
+    },
+    createUser() {
+      this.$Progress.start();
+
+      this.form
+        .post("api/user")
+        .then(() => {
+          Fire.$emit("after_created");
+          $("#exampleModal").modal("hide");
+          toast({
+            type: "success",
+            title: "User Created successfully"
+          });
+          this.$Progress.finish();
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
+  },
+  created() {
+    this.loadUser();
+    Fire.$on("after_created", () => {
+      this.loadUser();
+    });
+    // Fire.$refs('dom-element' , () => {
+    //   this.loadUser();
+    // })
+    // setInterval(() => {
+    //   this.loadUser()
+    // },2000)
+
+    //console.log(this.loadUser());
+  }
+};
 </script>
