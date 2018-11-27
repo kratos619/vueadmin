@@ -185,7 +185,11 @@
           }
           },
         created() {
-            this.loadUser();
+          this.loadUser();
+          setInterval(() => {
+            this.loadUser()
+          },2000)
+          
             //console.log(this.loadUser());
             
         }
