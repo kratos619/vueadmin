@@ -27,6 +27,7 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Type</th>
+                  <th>Date | Time</th>
                   <th></th>
                   <th>Modify</th>
                   <th></th>
@@ -35,6 +36,7 @@
                   <td>{{user.id}}</td>
                   <td>{{user.name}}</td>
                   <td>{{user.email}}</td>
+                  <td>{{user.create_at | newDate}}</td>
                   <td>
                     <span class="tag tag-success">{{user.type}}</span>
                   </td>
