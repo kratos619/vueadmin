@@ -74,11 +74,60 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">...</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+          <form @submit.prevent="createUser">
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Name</label>
+                <input
+                  v-model="form.name"
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('name') }"
+                >
+                <has-error :form="form" field="name"></has-error>
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input
+                  v-model="form.email"
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('email') }"
+                >
+                <has-error :form="form" field="email"></has-error>
+              </div>
+
+              <div class="form-group">
+                <label>Example select</label>
+                <select class="form-control" name="type" v-model="form.type">
+                  <option>select choice....</option>
+                  <option value="admin">admin</option>
+                  <option value="user">user</option>
+                  <option value="subscriber">subscriber</option>
+                </select>
+                <has-error :form="form" field="type"></has-error>
+              </div>
+
+              <div class="form-group">
+                <label>Name</label>
+                <input
+                  v-model="form.password"
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('password') }"
+                >
+                <has-error :form="form" field="password"></has-error>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -87,6 +136,24 @@
 
 <script>
     export default {
+        data(){
+          return{
+          form: new Form({
+                name:'',
+                email:'',
+                password:'',
+                about:'',
+                type:'',
+                photo:''
+            })
+          }
+            
+        },
+        methods:{
+          createUser(){
+           this.form.post('api/user');
+          }
+          },
         mounted() {
             console.log('Component mounted.')
         }
