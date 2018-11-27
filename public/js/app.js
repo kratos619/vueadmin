@@ -51575,6 +51575,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Fire.$on('after_created', function () {
       _this2.loadUser();
     });
+    // Fire.$refs('dom-element' , () => {
+    //   this.loadUser();
+    // })
     // setInterval(() => {
     //   this.loadUser()
     // },2000)

@@ -190,6 +190,9 @@
           Fire.$on('after_created',() => {
             this.loadUser();
           })
+          // Fire.$refs('dom-element' , () => {
+          //   this.loadUser();
+          // })
           // setInterval(() => {
           //   this.loadUser()
           // },2000)
