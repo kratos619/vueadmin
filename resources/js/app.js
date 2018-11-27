@@ -49,6 +49,8 @@ Vue.use(VueProgressBar, {
 Vue.filter('newDate', function(created) {
     return moment(created).format('MMMM Do YYYY, h:mm:ss a'); // November 27th 2018, 10:57:00 am
 });
+
+window.Fire = new Vue();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

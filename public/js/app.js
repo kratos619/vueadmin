@@ -14063,6 +14063,8 @@ __WEBPACK_IMPORTED_MODULE_5_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 __WEBPACK_IMPORTED_MODULE_5_vue___default.a.filter('newDate', function (created) {
     return __WEBPACK_IMPORTED_MODULE_1_moment___default()(created).format('MMMM Do YYYY, h:mm:ss a'); // November 27th 2018, 10:57:00 am
 });
+
+window.Fire = new __WEBPACK_IMPORTED_MODULE_5_vue___default.a();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -51556,6 +51558,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$Progress.start();
 
       this.form.post('api/user');
+      Fire.$emit('after_created');
       $('#exampleModal').modal('hide');
       toast({
         type: 'success',
@@ -51569,9 +51572,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this2 = this;
 
     this.loadUser();
-    setInterval(function () {
+    Fire.$on('after_created', function () {
       _this2.loadUser();
-    }, 2000);
+    });
+    // setInterval(() => {
+    //   this.loadUser()
+    // },2000)
 
     //console.log(this.loadUser());
   }
