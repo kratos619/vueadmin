@@ -8,11 +8,7 @@
 
             <div class="card-tools">
               <span>
-                <button
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  class="btn btn-primary btn-outline"
-                >
+                <button v-on:click="newModal" class="btn btn-primary btn-outline">
                   <i class="fas fa-plus-circle"></i> Add New
                 </button>
               </span>
@@ -79,12 +75,13 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 v-show="editMode" class="modal-title" id="exampleModalLabel">Update User</h5>
+            <h5 v-show="!editMode" class="modal-title" id="exampleModalLabel">Add User</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form @submit.prevent="createUser">
+          <form @submit.prevent="editMode ? updateUser() : createUser()">
             <div class="modal-body">
               <div class="form-group">
                 <label>Name</label>
@@ -145,7 +142,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              
+              <button v-show="!editMode" type="submit" class="btn btn-primary">Save changes</button>
+              <button v-show="editMode" type="submit" class="btn btn-warning">Update changes</button>
             </div>
           </form>
         </div>
@@ -158,6 +157,7 @@
 export default {
   data() {
     return {
+      editMode: false,
       users: {},
       form: new Form({
         name: "",
@@ -171,9 +171,16 @@ export default {
   },
   methods: {
     updateUser(user) {
+      this.editMode = true;
       this.form.reset();
       $("#exampleModal").modal("show");
       this.form.fill(user);
+    },
+    newModal() {
+      //Open modal on click
+      this.editMode = false;
+      this.form.reset();
+      $("#exampleModal").modal("show");
     },
     deleteUser(id) {
       swal({
@@ -211,6 +218,7 @@ export default {
         .then(() => {
           Fire.$emit("after_created");
           $("#exampleModal").modal("hide");
+          this.form.reset();
           toast({
             type: "success",
             title: "User Created successfully"
@@ -218,7 +226,7 @@ export default {
           this.$Progress.finish();
         })
         .catch(e => {
-          console.log(e);
+          Fire.$emit("after_created");
         });
     }
   },
