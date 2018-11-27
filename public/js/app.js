@@ -70843,6 +70843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       editMode: false,
       users: {},
       form: new Form({
+        id: "",
         name: "",
         email: "",
         password: "",
@@ -70854,8 +70855,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    updateUser: function updateUser() {
-      console.log("update Modal");
+    updateUser: function updateUser(id) {
+      var _this = this;
+
+      //console.log("update Modal");
+      this.$Progress.start();
+      this.form.put("api/user/" + this.form.id).then(function () {
+        //success
+        toast({
+          type: "success",
+          title: "User Update successfully"
+        });
+        Fire.$emit("after_created");
+        $("#exampleModal").modal("hide");
+        _this.$Progress.finish();
+      }).catch(function (e) {
+        _this.$Progress.fali();
+      });
     },
     updateUserModal: function updateUserModal(user) {
       this.editMode = true;
@@ -70870,7 +70886,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       $("#exampleModal").modal("show");
     },
     deleteUser: function deleteUser(id) {
-      var _this = this;
+      var _this2 = this;
 
       swal({
         title: "Are you sure?",
@@ -70882,7 +70898,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.value) {
-          _this.form.delete("api/user/" + id).then(function () {
+          _this2.form.delete("api/user/" + id).then(function () {
             swal("Deleted!", "Your file has been deleted.", "success");
             // This is relode page after event perform
             Fire.$emit("after_created");
@@ -70893,38 +70909,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     loadUser: function loadUser() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("api/user").then(function (_ref) {
         var data = _ref.data;
 
-        _this2.users = data.data;
+        _this3.users = data.data;
       });
     },
     createUser: function createUser() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       this.form.post("api/user").then(function () {
         Fire.$emit("after_created");
         $("#exampleModal").modal("hide");
-        _this3.form.reset();
+        _this4.form.reset();
         toast({
           type: "success",
           title: "User Created successfully"
         });
-        _this3.$Progress.finish();
+        _this4.$Progress.finish();
       }).catch(function (e) {
         Fire.$emit("after_created");
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadUser();
     Fire.$on("after_created", function () {
-      _this4.loadUser();
+      _this5.loadUser();
     });
     // Fire.$refs('dom-element' , () => {
     //   this.loadUser();

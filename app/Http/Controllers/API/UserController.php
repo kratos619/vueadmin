@@ -65,7 +65,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $selected_user = User::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$selected_user->id,
+            'password' => 'sometimes|string|max:40|min:6',
+        ]);
+        $selected_user->update($request->all());
+        //return response()->json($selected_user);
     }
 
     /**

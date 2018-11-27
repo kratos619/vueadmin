@@ -160,6 +160,7 @@ export default {
       editMode: false,
       users: {},
       form: new Form({
+        id: "",
         name: "",
         email: "",
         password: "",
@@ -170,8 +171,24 @@ export default {
     };
   },
   methods: {
-    updateUser() {
-      console.log("update Modal");
+    updateUser(id) {
+      //console.log("update Modal");
+      this.$Progress.start();
+      this.form
+        .put("api/user/" + this.form.id)
+        .then(() => {
+          //success
+          toast({
+            type: "success",
+            title: "User Update successfully"
+          });
+          Fire.$emit("after_created");
+          $("#exampleModal").modal("hide");
+          this.$Progress.finish();
+        })
+        .catch(e => {
+          this.$Progress.fali();
+        });
     },
     updateUserModal(user) {
       this.editMode = true;
