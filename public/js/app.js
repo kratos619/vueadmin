@@ -51555,25 +51555,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     createUser: function createUser() {
+      var _this2 = this;
+
       this.$Progress.start();
 
-      this.form.post('api/user');
-      Fire.$emit('after_created');
-      $('#exampleModal').modal('hide');
-      toast({
-        type: 'success',
-        title: 'User Created successfully'
+      this.form.post('api/user').then(function () {
+        Fire.$emit('after_created');
+        $('#exampleModal').modal('hide');
+        toast({
+          type: 'success',
+          title: 'User Created successfully'
+        });
+        _this2.$Progress.finish();
+      }).catch(function (e) {
+        console.log(e);
       });
-
-      this.$Progress.finish();
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.loadUser();
     Fire.$on('after_created', function () {
-      _this2.loadUser();
+      _this3.loadUser();
     });
     // Fire.$refs('dom-element' , () => {
     //   this.loadUser();
