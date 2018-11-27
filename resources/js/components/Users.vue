@@ -101,7 +101,7 @@
               </div>
 
               <div class="form-group">
-                <label>Example select</label>
+                <label>Select Role</label>
                 <select class="form-control" name="type" v-model="form.type">
                   <option>select choice....</option>
                   <option value="admin">admin</option>
@@ -112,7 +112,17 @@
               </div>
 
               <div class="form-group">
-                <label>Name</label>
+                <label for>About</label>
+                <textarea
+                  name="about"
+                  v-model="form.about"
+                  placeholder="about (optional)"
+                  class="form-control"
+                ></textarea>
+                <has-error :form="form" field="about"></has-error>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
                 <input
                   v-model="form.password"
                   type="password"
@@ -151,7 +161,8 @@
         },
         methods:{
           createUser(){
-           this.form.post('api/user');
+           this.form.post('api/user')
+           .then(({ data }) => { console.log(data) });
           }
           },
         mounted() {

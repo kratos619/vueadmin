@@ -51484,6 +51484,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -51501,7 +51511,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         createUser: function createUser() {
-            this.form.post('api/user');
+            this.form.post('api/user').then(function (_ref) {
+                var data = _ref.data;
+                console.log(data);
+            });
         }
     },
     mounted: function mounted() {
@@ -51628,7 +51641,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _c("label", [_vm._v("Example select")]),
+                        _c("label", [_vm._v("Select Role")]),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -51691,7 +51704,45 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _c("label", [_vm._v("Name")]),
+                        _c("label", { attrs: { for: "" } }, [_vm._v("About")]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.about,
+                              expression: "form.about"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            name: "about",
+                            placeholder: "about (optional)"
+                          },
+                          domProps: { value: _vm.form.about },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "about", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "about" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Password")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
