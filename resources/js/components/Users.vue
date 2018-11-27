@@ -40,7 +40,7 @@
                     <a
                       class="btn btn-warning btn-sm btn-block"
                       href="#"
-                      v-on:click="updateUser(user)"
+                      v-on:click="updateUserModal(user)"
                     >
                       <i class="fas fa-pencil-alt"></i> Edit
                     </a>
@@ -170,7 +170,10 @@ export default {
     };
   },
   methods: {
-    updateUser(user) {
+    updateUser() {
+      console.log("update Modal");
+    },
+    updateUserModal(user) {
       this.editMode = true;
       this.form.reset();
       $("#exampleModal").modal("show");

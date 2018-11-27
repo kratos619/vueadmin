@@ -70854,7 +70854,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    updateUser: function updateUser(user) {
+    updateUser: function updateUser() {
+      console.log("update Modal");
+    },
+    updateUserModal: function updateUserModal(user) {
       this.editMode = true;
       this.form.reset();
       $("#exampleModal").modal("show");
@@ -71001,7 +71004,7 @@ var render = function() {
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
-                                _vm.updateUser(user)
+                                _vm.updateUserModal(user)
                               }
                             }
                           },
