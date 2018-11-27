@@ -7,12 +7,14 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import swal from 'sweetalert2';
 import moment from 'moment';
 import VueProgressBar from 'vue-progressbar';
 import VueRouter from 'vue-router';
 import { Form, HasError, AlertError } from 'vform';
 import Vue from 'vue';
 window.Form = Form;
+window.swal = swal;
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
 
@@ -29,6 +31,14 @@ const router = new VueRouter({
     routes, // short for `routes: routes`
     linkActiveClass: 'active'
 });
+
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;
 
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',

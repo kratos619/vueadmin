@@ -171,14 +171,21 @@
             });
           },
           createUser(){
-           this.form.post('api/user')
-           .then(({ data }) => { console.log(data) });
+            this.$Progress.start();
+          
+          this.form.post('api/user');
+           $('#exampleModal').modal('hide')
+           toast({
+              type: 'success',
+              title: 'User Created successfully'
+            })
+           
+           this.$Progress.finish()
+           
           }
           },
         created() {
-            this.$Progress.start();
             this.loadUser();
-            this.$Progress.finish()
             //console.log(this.loadUser());
             
         }
