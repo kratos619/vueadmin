@@ -15,6 +15,7 @@ import { Form, HasError, AlertError } from 'vform';
 import Vue from 'vue';
 window.Form = Form;
 window.swal = swal;
+Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
 

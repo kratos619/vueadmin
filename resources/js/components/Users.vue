@@ -28,7 +28,7 @@
                   <th>Modify</th>
                   <th></th>
                 </tr>
-                <tr v-for="user in users" :key="user.id">
+                <tr v-for="user in users.data" :key="user.id">
                   <td>{{user.id}}</td>
                   <td>{{user.name}}</td>
                   <td>{{user.email}}</td>
@@ -60,6 +60,9 @@
             </table>
           </div>
           <!-- /.card-body -->
+          <div class="card-footer">
+            <pagination :data="users" @pagination-change-page="getResults"></pagination>
+          </div>
         </div>
         <!-- /.card -->
       </div>
@@ -171,6 +174,11 @@ export default {
     };
   },
   methods: {
+    getResults(page = 1) {
+      axios.get("api/user?page=" + page).then(response => {
+        this.users = response.data;
+      });
+    },
     updateUser(id) {
       //console.log("update Modal");
       this.$Progress.start();
@@ -228,7 +236,7 @@ export default {
     },
     loadUser() {
       axios.get("api/user").then(({ data }) => {
-        this.users = data.data;
+        this.users = data;
       });
     },
     createUser() {
@@ -263,6 +271,9 @@ export default {
     // },2000)
 
     //console.log(this.loadUser());
+  },
+  mounted() {
+    this.getResults();
   }
 };
 </script>
