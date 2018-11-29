@@ -259,6 +259,19 @@ export default {
     }
   },
   created() {
+    //searching funtion
+    Fire.$on("searching", () => {
+      let q = this.$parent.search;
+      axios
+        .get("api/findUser?q=" + q)
+        .then(data => {
+          this.users = data.data;
+          //console.log(this.users);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    });
     this.loadUser();
     Fire.$on("after_created", () => {
       this.loadUser();

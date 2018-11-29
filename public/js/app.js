@@ -41759,7 +41759,15 @@ __WEBPACK_IMPORTED_MODULE_5_vue___default.a.component('example-component', __web
 var app = new __WEBPACK_IMPORTED_MODULE_5_vue___default.a({
     el: '#app',
     routes: routes,
-    router: router
+    router: router,
+    data: {
+        search: {}
+    },
+    methods: {
+        searchIt: function searchIt() {
+            Fire.$emit('searching');
+        }
+    }
 });
 
 /***/ }),
@@ -72035,6 +72043,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     var _this6 = this;
 
+    //searching funtion
+    Fire.$on("searching", function () {
+      var q = _this6.$parent.search;
+      axios.get("api/findUser?q=" + q).then(function (data) {
+        _this6.users = data.data;
+        //console.log(this.users);
+      }).catch(function (e) {
+        console.log(e);
+      });
+    });
     this.loadUser();
     Fire.$on("after_created", function () {
       _this6.loadUser();
